@@ -1,0 +1,79 @@
+.container-block {
+    background-image: url("images/background.png");
+}
+
+.navbar-color {
+    /*background-color: #66b2ff;*/
+    background-color: #00bfff;
+}
+
+.main-color {
+    background-color: #FFFFFF;
+    border-color: #DEE2E6;
+}
+
+.name-block {
+    margin-top: 10px;
+    padding: 7px 10px 1px 10px;
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    position: relative;
+    z-index: 1;
+}
+
+.name-width-short {
+    width: 100px;
+}
+
+.name-width-normal {
+    width: 150px;
+}
+
+.name-width-long {
+    width: 200px;
+}
+
+.notes-block {
+    padding: 12px 10px 1px 10px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+}
+
+.input-block {
+    padding: 12px 10px 1px 10px;
+    margin-top: -1px;
+    margin-bottom: 12px;
+    border-radius: 0px 10px 10px 10px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+}
+
+.output-block {
+    padding: 7px 10px 1px 10px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 1px solid;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+}
+
+.tbl-column {
+    background-color: #9eff9e;
+}
+
+.tbl-record {
+    background-color: #FFFFFF;
+}
+
+.th-width {
+    width: 25%;
+}
+
+.error-message {
+    padding-left: 10px;
+}

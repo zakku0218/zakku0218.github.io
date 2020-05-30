@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="jp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/lightbox.min.css">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+        <title>エピックセブン　スピード計算機</title>
+    </head>
+
+    <body class="container container-block">
+        <nav class="navbar navbar-expand-sm mt-3 mb-3 navbar-color">
+            <a class="navbar-brand text-white navbar-font">敵スピード計算</a>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-white" href="calculate-first.html">先手獲得確率計算</a>
+            </div>
+        </nav>
+
+        <div class="col-sm-12 row">
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-1" aria-expanded="false" aria-controls="memo-1"  onclick="changeCollapse('memo-1')">基本</button>
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-2" aria-expanded="false" aria-controls="memo-2"  onclick="changeCollapse('memo-2')" >応用</button>
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-3" aria-expanded="false" aria-controls="memo-3"  onclick="changeCollapse('memo-3')" >注意事項</button>
+        </div>
+
+        <div class="memo-block collapse main-color" id="memo-1">
+            <div class="contents-position memo-padding">
+                <h6>
+                    主な使用目的：闘技場における再戦やギルド戦における後続の為の情報収集<br>
+                    <br>
+                    <a href="images/order1.png" data-lightbox="memo-1">戦闘開始直後の味方ターンで表示した行動順一覧画面</a><br>
+                    この画面から敵のスピードを計算する<br>
+                    ・味方キャラのデータが多いほど敵のスピードを絞り込める<br>
+                    ・データを入力すれば本サイトの画面下部に計算結果が自動的に表示される<br>
+                    　最低スピード～最高スピード：可能性がある相手のスピード範囲<br>
+                    　先手確定スピード：初回行動を敵より先に確実に獲得できるスピード<br>
+                    ・味方が先手を獲得する確率を知りたいなら、先手獲得率に味方のスピードを入力する<br>
+                    　先手獲得率：初回行動を敵より先に獲得できる確率
+                </h6>
+            </div>
+        </div>
+
+        <div class="memo-block collapse main-color" id="memo-2">
+            <div class="contents-position memo-padding">
+                <h6>
+                    初回行動を終えている敵はアクションゲージ＋100で計算<br>
+                    　<a href="images/order2.png" data-lightbox="memo-2">この画像のミルサは104、木シダーは127</a><br>
+                    　<br>
+                    アクションゲージダウンを受けたキャラはその数値分＋で計算、ゲージアップは－で計算<br>
+                    　<a href="images/order3.png" data-lightbox="memo-2">この画像の光マヤ、ディエネはバサールのS3によるゲージダウン30%を受けているので、それぞれ60,115で計算</a><br>
+                    　<br>
+                    計算できないパターン<br>
+                    　<a href="images/order4.png" data-lightbox="memo-2">スピードバフ・デバフを受けたキャラ</a><br>
+                    　<a href="images/order5.png" data-lightbox="memo-2">アクションゲージ100%を超えるゲージアップを受けたキャラ</a><br>
+                    　アクションゲージ0%を下回るゲージダウンを受けたキャラ<br>
+                    　数値が把握できないアクションゲージアップ・ダウンを受けたキャラ<br>
+                    　　例）敵の古代遺物「マージラハの魔導書」によるアクションゲージアップ
+                </h6>
+            </div>
+        </div>
+
+        <div class="memo-block collapse main-color" id="memo-3">
+            <div class="contents-position memo-padding">
+                <h6>
+                    本サイト使用にあたっての注意<br>
+                    ・<a href="images/consideration.png" data-lightbox="memo-3">本サイト作者の考察</a>を基に計算結果を出している<br>
+                    ・考察についても本サイトの計算処理についても、全てにおいて保証はできないので各々自己責任でよろしく<br>
+                    ・予告せず内容を更新、変更することがある<br>
+                    <br>
+                    戦闘開始時にアクションゲージが0～5%UPする仕様について<br>
+                    ・本サイトにおいて、戦闘開始時のアクションゲージUPはキャラ毎に0.2%刻みで26通りを計算する<br>
+                    <br>
+                    複数キャラが同時にアクションゲージ100%(同着)になる場合について<br>
+                    ・作者が検証したところ、味方のみであればキャラ獲得順(昇順)で先手獲得している<br>
+                    ・敵を含む場合の仕様については未検証<br>
+                    ・本サイトのページ「敵スピード計算」において、同着は敵の先手獲得として扱う
+                </h6>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="name-block name-width-short main-color">
+            <h5>味方1</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally1-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>アクションゲージ%</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally1-gauge" value="100" oninput="updateNumber('ally1-gauge')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally1-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally1-gauge')">
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally1-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally1-speed" value="200" oninput="updateNumber('ally1-speed')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally1-speed-range" min="80" max="350" value="200" oninput="updateRange('ally1-speed')">
+                </div>
+            </div>
+        </div>
+     
+        <div class="name-block name-width-short main-color" id="ally2-name">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="ally2-check" data-toggle="collapse" data-target="#ally2-input" aria-expanded="false" aria-controls="ally2-input" onclick="changeDisabled('ally2');">
+                <label class="custom-control-label" for="ally2-check">
+                    <h5>味方2</h5>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12 input-block collapse main-color" id="ally2-input">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally2-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>アクションゲージ%</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally2-gauge" value="100" oninput="updateNumber('ally2-gauge')" disabled>
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally2-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally2-gauge')" disabled>
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally2-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally2-speed" value="200" oninput="updateNumber('ally2-speed')" disabled>
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally2-speed-range" min="80" max="350" value="200" oninput="updateRange('ally2-speed')" disabled>
+                </div>
+            </div>
+        </div>
+     
+        <div class="name-block name-width-short main-color" id="ally3-name">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="ally3-check" data-toggle="collapse" data-target="#ally3-input" aria-expanded="false" aria-controls="ally3-input" onclick="changeDisabled('ally3');">
+                <label class="custom-control-label" for="ally3-check">
+                    <h5>味方3</h5>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12 input-block collapse main-color" id="ally3-input">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally3-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>アクションゲージ%</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally3-gauge" value="100" oninput="updateNumber('ally3-gauge')" disabled>
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally3-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally3-gauge')" disabled>
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally3-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally3-speed" value="200" oninput="updateNumber('ally3-speed')" disabled>
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally3-speed-range" min="80" max="350" value="200" oninput="updateRange('ally3-speed')" disabled>
+                </div>
+            </div>
+        </div>
+     
+        <div class="name-block name-width-short main-color" id="ally4-name">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="ally4-check" data-toggle="collapse" data-target="#ally4-input" aria-expanded="false" aria-controls="ally4-input" onclick="changeDisabled('ally4');">
+                <label class="custom-control-label" for="ally4-check">
+                    <h5>味方4</h5>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12 input-block collapse main-color" id="ally4-input">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally4-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>アクションゲージ%</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally4-gauge" value="100" oninput="updateNumber('ally4-gauge')" disabled>
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally4-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally4-gauge')" disabled>
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally4-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally4-speed" value="200" oninput="updateNumber('ally4-speed')" disabled>
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally4-speed-range" min="80" max="350" value="200" oninput="updateRange('ally4-speed')" disabled>
+                </div>
+            </div>
+        </div>
+     
+        <div class="name-block name-width-short main-color">
+            <h5>敵</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="enemy-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>アクションゲージ%</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="enemy-gauge" value="100" oninput="updateNumber('enemy-gauge')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="enemy-gauge-range" min="0" max="200" value="100" oninput="updateRange('enemy-gauge')">
+                </div>
+            </div>
+        </div>
+
+        <div class="name-block name-width-normal main-color" data-toggle="tooltip" title="このスピードで初回行動を敵より先に獲得できる確率">
+            <h5>先手獲得率</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="prob-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="prob-speed" value="200" oninput="updateNumber('prob-speed')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="prob-speed-range" min="80" max="350" value="200" oninput="updateRange('prob-speed')">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <div class="output-block main-color">
+            <h4>計算結果</h4>
+            <div id="error-message">
+                <h5>入力データに誤りがあります</h5>
+            </div>
+            <div id="output-data">
+                <table class="table table-bordered table-sm col-sm-12">
+                    <thead class="tbl-column">
+                        <tr>
+                            <th class="w-25">最低スピード</th>
+                            <th class="w-25">最高スピード</th>
+                            <th class="w-25">先手確定スピード</th>
+                            <th class="w-25">先手獲得率(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbl-record">
+                        <tr>
+                            <td id="min-speed"></td>
+                            <td id="max-speed"></td>
+                            <td id="confirm-speed"></td>
+                            <td id="probability-speed"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="scripts/calculate.js"></script>
+        <script src="scripts/common.js"></script>
+        <script src="scripts/bignumber.js"></script>
+        <script src="scripts/lightbox.min.js"></script>
+    </body>
+</html>

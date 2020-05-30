@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="jp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/lightbox.min.css">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+        <title>エピックセブン　スピード計算機</title>
+    </head>
+
+    <body class="container container-block">
+        <nav class="navbar navbar-expand-sm mt-3 mb-3 navbar-color">
+            <a class="navbar-brand text-white navbar-font">先手獲得確率計算</a>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-white" href="calculate.html">敵スピード計算</a>
+            </div>
+        </nav>
+    
+        <div class="col-sm-12 row">
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-1" aria-expanded="false" aria-controls="memo-1"  onclick="changeCollapse('memo-1')">基本</button>
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-3" aria-expanded="false" aria-controls="memo-3"  onclick="changeCollapse('memo-3')" >注意事項</button>
+        </div>
+    
+        <div class="memo-block collapse main-color" id="memo-1">
+            <div class="contents-position memo-padding">
+                <h6>
+                    主な使用目的<br>
+                    　味方キャラの行動順を確定させたい<br>
+                    　乱数による初回行動順逆転発生率が自分にとって無視できる確率か知りたい<br>
+                    　一方の初回行動獲得時、もう一方のアクションゲージ位置を知りたい<br>
+                    <br>
+                    ・データを入力すれば本サイトの画面下部に計算結果が自動的に表示される<br>
+                    　キャラ〇初回行動時位置：比較相手が初回行動を獲得した際のアクションゲージ位置<br>
+                    　先手獲得率：初回行動を比較相手より先に獲得できる確率
+                </h6>
+            </div>
+        </div>
+    
+        <div class="memo-block collapse main-color" id="memo-3">
+            <div class="contents-position memo-padding">
+                <h6>
+                    本サイト使用にあたっての注意<br>
+                    ・<a href="images/consideration.png" data-lightbox="memo-3">本サイト作者の考察</a>を基に計算結果を出している<br>
+                    ・考察についても本サイトの計算処理についても、全てにおいて保証はできないので各々自己責任でよろしく<br>
+                    ・予告せず内容を更新、変更することがある<br>
+                    <br>
+                    戦闘開始時にアクションゲージが0～5%UPする仕様について<br>
+                    ・本サイトにおいて、戦闘開始時のアクションゲージUPはキャラ毎に0.2%刻みで26通りを計算する<br>
+                    <br>
+                    複数キャラが同時にアクションゲージ100%(同着)になる場合について<br>
+                    ・作者が検証したところ、味方のみであればキャラ獲得順(昇順)で先手獲得している<br>
+                    ・敵を含む場合の仕様については未検証<br>
+                    ・本サイトのページ「先手獲得確率計算」において、同着は比較相手の先手獲得として扱う
+                </h6>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="name-block name-width-short main-color">
+            <h5>キャラ1</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally1-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally1-speed" value="200" oninput="updateNumber('ally1-speed')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally1-speed-range" min="80" max="350" value="200" oninput="updateRange('ally1-speed')">
+                </div>
+            </div>
+        </div>
+
+        <div class="name-block name-width-short main-color">
+            <h5>キャラ2</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally2-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>スピード</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally2-speed" value="200" oninput="updateNumber('ally2-speed')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally2-speed-range" min="80" max="350" value="200" oninput="updateRange('ally2-speed')">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+            
+        <div class="output-block main-color">
+            <h4>計算結果</h4>
+            <div id="output-data">
+                <table class="table table-bordered table-sm col-sm-12">
+                    <thead class="tbl-column">
+                        <tr>
+                            <th class="text-center split-left" colspan="2">キャラ1</th>
+                            <th class="text-center split-right" colspan="2">キャラ2</th>
+                        </tr>
+                        <tr>
+                            <th class="w-25">キャラ2初回行動時位置</th>
+                            <th class="w-25 split-left">先手獲得率(%)</th>
+                            <th class="w-25 split-right">キャラ1初回行動時時位置</th>
+                            <th class="w-25">先手獲得率(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbl-record">
+                        <tr>
+                            <td id="gauge-chara1"></td>
+                            <td id="probability-chara1" class="split-left"></td>
+                            <td id="gauge-chara2" class="split-right"></td>
+                            <td id="probability-chara2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="scripts/calculate-first.js"></script>
+        <script src="scripts/common.js"></script>
+        <script src="scripts/bignumber.js"></script>
+        <script src="scripts/lightbox.min.js"></script>
+    </body>
+</html>
