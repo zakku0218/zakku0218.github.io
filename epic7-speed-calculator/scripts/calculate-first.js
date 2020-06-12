@@ -30,11 +30,9 @@ const calcProbability = (chara1Speed, chara2Speed) => {
             //キャラ1の方が速い
             if (chara1Time < chara2Time) {
                 chara1FastCount++;
-                let tmpGauge = chara1Time / chara2Time;
             //キャラ2の方が速い
             } else if (chara1Time > chara2Time) {
                 chara2FastCount++;
-                let tmpGauge = chara2Time / chara1Time;
             }
             //戦闘開始時アクションゲージ0.2%ずつ計算
             j = BigNumber(j).plus(0.2);
@@ -44,10 +42,10 @@ const calcProbability = (chara1Speed, chara2Speed) => {
         i = BigNumber(i).plus(0.2);
     }
     //比較相手の初回行動時アクションゲージ位置
-    const chara1MinGauge = Math.floor((95 / chara2Speed) / (100 / chara1Speed) * 100);
-    const chara1MaxGauge = Math.floor((100 / chara2Speed) / (95 / chara1Speed) * 100);
-    const chara2MinGauge = Math.floor((95 / chara1Speed) / (100 / chara2Speed) * 100);
-    const chara2MaxGauge = Math.floor((100 / chara1Speed) / (95 / chara2Speed) * 100);
+    const chara1MinGauge = Math.floor(chara1Speed * (95 / chara2Speed));
+    const chara1MaxGauge = Math.floor(chara1Speed * (100 / chara2Speed) + 5);
+    const chara2MinGauge = Math.floor(chara2Speed * (95 / chara1Speed));
+    const chara2MaxGauge = Math.floor(chara2Speed * (100 / chara1Speed) + 5);
 
     //先手獲得確率計算
     return {
