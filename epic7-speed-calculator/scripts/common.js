@@ -9,7 +9,7 @@ const updateNumber = (fieldId) => {
     const numberElement = document.getElementById(fieldId);
     const rangeElement = document.getElementById(`${fieldId}-range`);
     const updateValue = Number(numberElement.value);
-    const max = Number(rangeElement.getAttribute('max'));
+    const max = Number(numberElement.getAttribute('max'));
     if (updateValue > max) {
         rangeElement.value = max;
         numberElement.value = max;
