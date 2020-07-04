@@ -95,7 +95,7 @@
                         <h5>アクションゲージ%</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally1-gauge" value="100" oninput="updateNumber('ally1-gauge')">
+                        <input type="number" class="form-control text-center" id="ally1-gauge" min="0" max="500" value="100" oninput="updateNumber('ally1-gauge')">
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally1-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally1-gauge')">
                 </div>
@@ -104,7 +104,7 @@
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally1-speed" value="200" oninput="updateNumber('ally1-speed')">
+                        <input type="number" class="form-control text-center" id="ally1-speed" min="80" max="350" value="200" oninput="updateNumber('ally1-speed')">
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally1-speed-range" min="80" max="350" value="200" oninput="updateRange('ally1-speed')">
                 </div>
@@ -126,7 +126,7 @@
                         <h5>アクションゲージ%</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally2-gauge" value="100" oninput="updateNumber('ally2-gauge')" disabled>
+                        <input type="number" class="form-control text-center" id="ally2-gauge" min="0" max="500" value="100" oninput="updateNumber('ally2-gauge')" disabled>
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally2-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally2-gauge')" disabled>
                 </div>
@@ -135,7 +135,7 @@
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally2-speed" value="200" oninput="updateNumber('ally2-speed')" disabled>
+                        <input type="number" class="form-control text-center" id="ally2-speed" min="80" max="350" value="200" oninput="updateNumber('ally2-speed')" disabled>
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally2-speed-range" min="80" max="350" value="200" oninput="updateRange('ally2-speed')" disabled>
                 </div>
@@ -157,7 +157,7 @@
                         <h5>アクションゲージ%</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally3-gauge" value="100" oninput="updateNumber('ally3-gauge')" disabled>
+                        <input type="number" class="form-control text-center" id="ally3-gauge" min="0" max="500" value="100" oninput="updateNumber('ally3-gauge')" disabled>
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally3-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally3-gauge')" disabled>
                 </div>
@@ -166,7 +166,7 @@
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally3-speed" value="200" oninput="updateNumber('ally3-speed')" disabled>
+                        <input type="number" class="form-control text-center" id="ally3-speed" min="80" max="350" value="200" oninput="updateNumber('ally3-speed')" disabled>
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally3-speed-range" min="80" max="350" value="200" oninput="updateRange('ally3-speed')" disabled>
                 </div>
@@ -188,7 +188,7 @@
                         <h5>アクションゲージ%</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally4-gauge" value="100" oninput="updateNumber('ally4-gauge')" disabled>
+                        <input type="number" class="form-control text-center" id="ally4-gauge" min="0" max="500" value="100" oninput="updateNumber('ally4-gauge')" disabled>
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally4-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally4-gauge')" disabled>
                 </div>
@@ -197,7 +197,7 @@
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="ally4-speed" value="200" oninput="updateNumber('ally4-speed')" disabled>
+                        <input type="number" class="form-control text-center" id="ally4-speed" min="80" max="350" value="200" oninput="updateNumber('ally4-speed')" disabled>
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally4-speed-range" min="80" max="350" value="200" oninput="updateRange('ally4-speed')" disabled>
                 </div>
@@ -214,7 +214,7 @@
                         <h5>アクションゲージ%</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="enemy-gauge" value="100" oninput="updateNumber('enemy-gauge')">
+                        <input type="number" class="form-control text-center" id="enemy-gauge" min="0" max="500" value="100" oninput="updateNumber('enemy-gauge')">
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="enemy-gauge-range" min="0" max="200" value="100" oninput="updateRange('enemy-gauge')">
                 </div>
@@ -231,7 +231,7 @@
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
-                        <input type="number" class="form-control text-center" id="prob-speed" value="200" oninput="updateNumber('prob-speed')">
+                        <input type="number" class="form-control text-center" id="prob-speed" min="80" max="350" value="200" oninput="updateNumber('prob-speed')">
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="prob-speed-range" min="80" max="350" value="200" oninput="updateRange('prob-speed')">
                 </div>
