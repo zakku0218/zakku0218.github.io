@@ -74,6 +74,10 @@
     z-index: 2;
 }
 
+.radio-block {
+    padding-left: 15px;
+}
+
 .tbl-column {
     background-color: #9eff9e;
 }
@@ -100,4 +104,12 @@ table .split-right {
 
 .table thead th {
     vertical-align: middle;
+}
+
+.table-w-17 {
+    width: 10%;
+}
+
+.big-img {
+    max-width: 100%;
 }

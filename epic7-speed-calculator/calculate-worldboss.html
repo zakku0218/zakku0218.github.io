@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="jp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/lightbox.min.css">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+        <title>エピックセブン　スピード計算機</title>
+    </head>
+
+    <body class="container container-block">
+        <nav class="navbar navbar-expand-sm mt-3 mb-3 navbar-color">
+            <a class="navbar-brand text-white navbar-font">ワールドボス ポイント計算</a>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-white" href="index.html">敵スピード計算</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-white" href="calculate-first.html">先手獲得確率計算</a>
+            </div>
+            <div class="navbar-nav other">
+                <a class="nav-item nav-link text-white" href="https://zakku0218.blog.fc2.com" target="_blank" rel="noopener noreferrer">その他検証・考察</a>
+            </div>
+        </nav>
+
+        <div class="col-sm-12 row">
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-1" aria-expanded="false" aria-controls="memo-1"  onclick="changeCollapse('memo-1')">基本</button>
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-2" aria-expanded="false" aria-controls="memo-2"  onclick="changeCollapse('memo-2')">評価ランク一覧</button>
+            <button type="button" class="btn btn-secondary border" data-toggle="collapse" data-target="#memo-3" aria-expanded="false" aria-controls="memo-3"  onclick="changeCollapse('memo-3')" >注意事項</button>
+        </div>
+
+        <div class="memo-block collapse main-color" id="memo-1">
+            <div class="contents-position memo-padding">
+                <h6>
+                    主な使用目的：ワールドボスにおいて編成画面の情報から最終ポイントを事前に知る事<br>
+                    <br>
+                    ・データを入力すれば本サイトの画面下部に計算結果が自動的に表示される<br>
+                    　入替計算：編成を1キャラ分変更しようとする際、最終ポイントを伸ばすのに有効な戦闘力はいくつか以上からなのか計算する<br>
+                </h6>
+            </div>
+        </div>
+
+        <div class="memo-block collapse main-color" id="memo-2">
+            <div class="contents-position memo-padding">
+                <img class="big-img" src="images/rank.png" >
+            </div>
+        </div>
+
+        <div class="memo-block collapse main-color" id="memo-3">
+            <div class="contents-position memo-padding">
+                <h6>
+                    本サイト使用にあたっての注意<br>
+                    ・本サイト作者の考察(下記参照)を基に計算結果を出している<br>
+                    ・考察についても本サイトの計算処理についても、全てにおいて保証はできないので各々自己責任でよろしく<br>
+                    ・予告せず内容を更新、変更することがある<br>
+                    ・<a href="images/worldboss1.png" data-lightbox="memo-3">考察①</a><br>
+                    ・<a href="images/worldboss2.png" data-lightbox="memo-3">考察②</a><br>
+                    <br>
+                    最終ポイント計算と入替戦闘力計算について<br>
+                    ・最終ポイントのより正確な計算は以下の流れであり、本サイトでも最終ポイント計算では同処理を行っている<br>
+                    　１．編成1～3の合計戦闘力を1.1掛けした数値を小数点切り捨て<br>
+                    　２．１の結果にボーナスポイント倍率を掛けた数値を小数点切り捨て<br>
+                    　３．サポート編成の戦闘力を1.1掛けした数値を小数点切り捨て<br>
+                    　４．３の結果にボーナスポイント倍率を掛けた数値を小数点切り捨て<br>
+                    　５．２と４の結果を足す<br>
+                    ・入替戦闘力計算においては、編成1～3とサポート編成を分けずに全編成の合計戦闘力で計算を行っている為、正確な数値とはズレが生じる場合がある<br>
+
+                </h6>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="name-block name-width-normal main-color">
+            <h5>編成情報</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally1-cp" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>戦闘力　編成1</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally1-cp" min="0" max="800000" value="400000" oninput="updateNumber('ally1-cp')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally1-cp-range" min="0" max="800000" value="400000" oninput="updateRange('ally1-cp')">
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally2-cp" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>戦闘力　編成2</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally2-cp" min="0" max="800000" value="400000" oninput="updateNumber('ally2-cp')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally2-cp-range" min="0" max="800000" value="400000" oninput="updateRange('ally2-cp')">
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally3-cp" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>戦闘力　編成3</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally3-cp" min="0" max="800000" value="400000" oninput="updateNumber('ally3-cp')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally3-cp-range" min="0" max="800000" value="400000" oninput="updateRange('ally3-cp')">
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="support-cp" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>戦闘力　サポート</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="support-cp" min="0" max="800000" value="400000" oninput="updateNumber('support-cp')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="support-cp-range" min="0" max="800000" value="400000" oninput="updateRange('support-cp')">
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="bonus-point" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>ボーナスポイント</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="bonus-point" min="100" max="204" value="140" step="4" oninput="updateNumber('bonus-point')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="bonus-point-range" min="100" max="204" value="140" step="4" oninput="updateRange('bonus-point')">
+                </div>
+            </div>
+        </div>
+
+        <div class="name-block name-width-normal main-color" data-toggle="tooltip" title="最終ポイントを伸ばすのに必要な戦闘力を計算">
+            <h5>入替計算</h5>
+        </div>
+        <div class="col-sm-12 input-block main-color">
+            <div class="contents-position">
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="replacement-cp" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>戦闘力　外すキャラ</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="replacement-cp" min="0" max="200000" value="100000" oninput="updateNumber('replacement-cp')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="replacement-cp-range" min="0" max="200000" value="100000" oninput="updateRange('replacement-cp')">
+                </div>
+                <div class="radio-block">
+                    <div class="form-group form-check">
+                      <input class="form-check-input" type="radio" name="replacement-radio" id="replacement-radio1" onchange="calculate()" checked>
+                      <label class="form-check-label" for="replacement-radio1"><h5>外すキャラは強化属性(入れるキャラは非強化属性)</h5></label>
+                    </div>
+                    <div class="form-group form-check">
+                      <input class="form-check-input" type="radio" name="replacement-radio" id="replacement-radio2" onchange="calculate()">
+                      <label class="form-check-label" for="replacement-radio2"><h5>外すキャラは非強化属性(入れるキャラは強化属性)</h5></label>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <div class="output-block main-color">
+            <h4>計算結果</h4>
+            <div id="output-data">
+                <table class="table table-bordered table-sm col-sm-12">
+                    <thead class="tbl-column">
+                        <tr>
+                            <th class="table-w-17">獲得ポイント</th>
+                            <th class="table-w-17">サポートポイント</th>
+                            <th class="table-w-17">最終ポイント</th>
+                            <th class="table-w-17">評価ランク</th>
+                            <th class="table-w-17">次ランク</th>
+                            <th class="table-w-17">入替戦闘力</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbl-record">
+                        <tr>
+                            <td id="ally-point"></td>
+                            <td id="support-point"></td>
+                            <td id="total-point"></td>
+                            <td id="rank"></td>
+                            <td id="next-rank"></td>
+                            <td id="minimum-cp"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="scripts/calculate-worldboss.js"></script>
+        <script src="scripts/common.js"></script>
+        <script src="scripts/bignumber.js"></script>
+        <script src="scripts/lightbox.min.js"></script>
+    </body>
+</html>
