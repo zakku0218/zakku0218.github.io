@@ -20,9 +20,7 @@ const calculate = () => {
         const outputData = calcOutput(allyArray, enemyGauge, probSpeed);
     
         //テーブルのセルへ出力データをセット
-        document.getElementById("min-speed").textContent = outputData['min'];
-        document.getElementById("max-speed").textContent = outputData['max'];
-        document.getElementById("confirm-speed").textContent = outputData['confirm'];
+        document.getElementById("enemy-speed").textContent = outputData['enemySpeed'];
         document.getElementById("probability-speed").textContent = outputData['probability'];
 
     } catch (e) {
@@ -110,9 +108,7 @@ const calcOutput = (allyArray, enemyGauge, probSpeed) => {
     firstProb = BigNumber(firstProb).dp(2, BigNumber.ROUND_DOWN);
 
     return {
-        min : speedMin,
-        max : speedMax,
-        confirm : speedMax + Math.floor(speedMax / 19 + 1),
+        enemySpeed : speedMin + "～" + speedMax,
         probability : firstProb
     };
 };

@@ -40,8 +40,7 @@
                     この画面から敵のスピードを計算する<br>
                     ・味方キャラのデータが多いほど敵のスピードを絞り込める<br>
                     ・データを入力すれば本サイトの画面下部に計算結果が自動的に表示される<br>
-                    　最低スピード～最高スピード：可能性がある相手のスピード範囲<br>
-                    　先手確定スピード：初回行動を敵より先に確実に獲得できるスピード<br>
+                    　敵スピード：可能性がある敵のスピード範囲<br>
                     ・味方が先手を獲得する確率を知りたいなら、先手獲得率に味方のスピードを入力する<br>
                     　先手獲得率：初回行動を敵より先に獲得できる確率
                 </h6>
@@ -103,7 +102,7 @@
                     <input type="range" class="col-sm-6 custom-range" id="ally1-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally1-gauge')">
                 </div>
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="ally1-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="ally1-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
@@ -134,7 +133,7 @@
                     <input type="range" class="col-sm-6 custom-range" id="ally2-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally2-gauge')" disabled>
                 </div>
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="ally2-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="ally2-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
@@ -165,7 +164,7 @@
                     <input type="range" class="col-sm-6 custom-range" id="ally3-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally3-gauge')" disabled>
                 </div>
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="ally3-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="ally3-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
@@ -196,7 +195,7 @@
                     <input type="range" class="col-sm-6 custom-range" id="ally4-gauge-range" min="0" max="200" value="100" oninput="updateRange('ally4-gauge')" disabled>
                 </div>
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="ally4-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="ally4-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
@@ -230,7 +229,7 @@
         <div class="col-sm-12 input-block main-color">
             <div class="contents-position">
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="prob-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="prob-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
@@ -252,18 +251,14 @@
                 <table class="table table-bordered table-sm col-sm-12">
                     <thead class="tbl-column">
                         <tr>
-                            <th class="w-25">最低スピード</th>
-                            <th class="w-25">最高スピード</th>
-                            <th class="w-25">先手確定スピード</th>
-                            <th class="w-25">先手獲得率(%)</th>
+                            <th class="w-50 text-center">敵スピード</th>
+                            <th class="w-50 text-center">先手獲得率(%)</th>
                         </tr>
                     </thead>
                     <tbody class="tbl-record">
                         <tr>
-                            <td id="min-speed"></td>
-                            <td id="max-speed"></td>
-                            <td id="confirm-speed"></td>
-                            <td id="probability-speed"></td>
+                            <td class="text-center" id="enemy-speed"></td>
+                            <td class="text-center" id="probability-speed"></td>
                         </tr>
                     </tbody>
                 </table>

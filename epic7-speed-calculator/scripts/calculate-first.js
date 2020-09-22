@@ -3,9 +3,11 @@ const calculate = () => {
     //入力データ取得
     const chara1Speed = parseInt(document.getElementById("ally1-speed").value);
     const chara2Speed = parseInt(document.getElementById("ally2-speed").value);
+    const chara1Gauge = parseInt(document.getElementById("ally1-gauge").value);
+    const chara2Gauge = parseInt(document.getElementById("ally2-gauge").value);
     
     //先手獲得確率の計算処理
-    const probArray = calcProbability(chara1Speed, chara2Speed);
+    const probArray = calcProbability(chara1Speed, chara2Speed, chara1Gauge, chara2Gauge);
     
     //テーブルのセルへ出力データをセット
     document.getElementById("gauge-chara1").textContent = probArray['chara1Gauge'];
@@ -16,7 +18,7 @@ const calculate = () => {
 };
 
 //先手獲得確率の計算処理
-const calcProbability = (chara1Speed, chara2Speed) => {
+const calcProbability = (chara1Speed, chara2Speed, chara1Gauge, chara2Gauge) => {
 
     let chara1FastCount = 0;
     let chara2FastCount = 0;
@@ -24,9 +26,9 @@ const calcProbability = (chara1Speed, chara2Speed) => {
 
     //キャラ1とキャラ2、それぞれの先手獲得回数をカウント
     for (let i = 0; i <= 5; ) {
-        let chara1Time = (100 - i) / chara1Speed;
+        let chara1Time = (100 - chara1Gauge - i) / chara1Speed;
         for (let j = 0; j <= 5; ) {
-            let chara2Time = (100 - j) / chara2Speed;
+            let chara2Time = (100 - chara2Gauge - j) / chara2Speed;
             //キャラ1の方が速い
             if (chara1Time < chara2Time) {
                 chara1FastCount++;
@@ -42,10 +44,10 @@ const calcProbability = (chara1Speed, chara2Speed) => {
         i = BigNumber(i).plus(0.2);
     }
     //比較相手の初回行動時アクションゲージ位置
-    const chara1MinGauge = Math.floor(chara1Speed * (95 / chara2Speed));
-    const chara1MaxGauge = Math.floor(chara1Speed * (100 / chara2Speed) + 5);
-    const chara2MinGauge = Math.floor(chara2Speed * (95 / chara1Speed));
-    const chara2MaxGauge = Math.floor(chara2Speed * (100 / chara1Speed) + 5);
+    const chara1MinGauge = Math.floor(((95 - chara2Gauge) / chara2Speed) / ((100 - chara1Gauge) / chara1Speed) * 100);
+    const chara1MaxGauge = Math.floor(((100 - chara2Gauge) / chara2Speed) / ((95 - chara1Gauge) / chara1Speed) * 100);
+    const chara2MinGauge = Math.floor(((95 - chara1Gauge) / chara1Speed) / ((100 - chara2Gauge) / chara2Speed) * 100);
+    const chara2MaxGauge = Math.floor(((100 - chara1Gauge) / chara1Speed) / ((95 - chara2Gauge) / chara2Speed) * 100);
 
     //先手獲得確率計算
     return {

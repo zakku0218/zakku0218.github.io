@@ -40,7 +40,10 @@
                     <br>
                     ・データを入力すれば本サイトの画面下部に計算結果が自動的に表示される<br>
                     　キャラ〇初回行動時位置：比較相手が初回行動を獲得した際のアクションゲージ位置<br>
-                    　先手獲得率：初回行動を比較相手より先に獲得できる確率
+                    　先手獲得率：初回行動を比較相手より先に獲得できる確率<br>
+                    ・ゲージアップダウンについて<br>
+                    　ジュディスや光ファジスなどによるゲージアップを計算に含めての先手獲得率を知りたい場合に入力しよう<br>
+                    　単純にゲージアップなら正数、ゲージダウンなら負数の入力でOK<br>
                 </h6>
             </div>
         </div>
@@ -72,7 +75,7 @@
         <div class="col-sm-12 input-block main-color">
             <div class="contents-position">
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="ally1-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="ally1-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
@@ -80,6 +83,15 @@
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally1-speed-range" min="80" max="350" value="200" oninput="updateRange('ally1-speed')">
                 </div>
+            </div>
+            <div class="form-group row col-sm-12 align-items-center">
+                <label for="ally1-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <h5>ゲージアップダウン%</h5>
+                </label>
+                <div class="input-group input-group-sm col-sm-3">
+                    <input type="number" class="form-control text-center" id="ally1-gauge" min="-90" max="90" value="0" oninput="updateNumber('ally1-gauge')">
+                </div>
+                <input type="range" class="col-sm-6 custom-range" id="ally1-gauge-range" min="-90" max="90" value="0" oninput="updateRange('ally1-gauge')">
             </div>
         </div>
 
@@ -89,13 +101,22 @@
         <div class="col-sm-12 input-block main-color">
             <div class="contents-position">
                 <div class="form-group row col-sm-12 align-items-center">
-                    <label for="ally2-gauge" class="col-sm-3 col-form-label form-control-sm">
+                    <label for="ally2-speed" class="col-sm-3 col-form-label form-control-sm">
                         <h5>スピード</h5>
                     </label>
                     <div class="input-group input-group-sm col-sm-3">
                         <input type="number" class="form-control text-center" id="ally2-speed" min="80" max="350" value="200" oninput="updateNumber('ally2-speed')">
                     </div>
                     <input type="range" class="col-sm-6 custom-range" id="ally2-speed-range" min="80" max="350" value="200" oninput="updateRange('ally2-speed')">
+                </div>
+                <div class="form-group row col-sm-12 align-items-center">
+                    <label for="ally2-gauge" class="col-sm-3 col-form-label form-control-sm">
+                        <h5>ゲージアップダウン%</h5>
+                    </label>
+                    <div class="input-group input-group-sm col-sm-3">
+                        <input type="number" class="form-control text-center" id="ally2-gauge" min="-90" max="90" value="0" oninput="updateNumber('ally2-gauge')">
+                    </div>
+                    <input type="range" class="col-sm-6 custom-range" id="ally2-gauge-range" min="-90" max="90" value="0" oninput="updateRange('ally2-gauge')">
                 </div>
             </div>
         </div>
@@ -112,18 +133,18 @@
                             <th class="text-center split-right" colspan="2">キャラ2</th>
                         </tr>
                         <tr>
-                            <th class="w-25">キャラ2初回行動時位置</th>
-                            <th class="w-25 split-left">先手獲得率(%)</th>
-                            <th class="w-25 split-right">キャラ1初回行動時位置</th>
-                            <th class="w-25">先手獲得率(%)</th>
+                            <th class="w-25 text-center">キャラ2初回行動時位置</th>
+                            <th class="w-25 text-center split-left">先手獲得率(%)</th>
+                            <th class="w-25 text-center split-right">キャラ1初回行動時位置</th>
+                            <th class="w-25 text-center">先手獲得率(%)</th>
                         </tr>
                     </thead>
                     <tbody class="tbl-record">
                         <tr>
-                            <td id="gauge-chara1"></td>
-                            <td id="probability-chara1" class="split-left"></td>
-                            <td id="gauge-chara2" class="split-right"></td>
-                            <td id="probability-chara2"></td>
+                            <td class="text-center" id="gauge-chara1"></td>
+                            <td class="text-center" id="probability-chara1" class="split-left"></td>
+                            <td class="text-center" id="gauge-chara2" class="split-right"></td>
+                            <td class="text-center" id="probability-chara2"></td>
                         </tr>
                     </tbody>
                 </table>
